@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+:root {
+  font-family: 'Karla', sans-serif;
+  font-size: 16px;
+
+  --color-background: rgb(12, 12, 12);
+  --color-background-soft: rgb(18, 18, 18);
+
+  --color-heading: #000;
+  --color-text: rgb(191, 191, 191);
+
+  text-rendering: optimizeLegibility;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-color: var(--color-background);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  background: var(--color-heading);
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2rem;
+
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+p {
+  color: var(--color-text);
+
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.container {
+  background-color: var(--color-background);
+
+  height: 100vh;
+  width: 100vw;
+}
+
+.cards {
+  height: inherit;
+  width: inherit;
+
+  gap: 2rem;
+  padding: 2rem;
+
+  display: grid;
+
+  grid-template: repeat(4, 1fr) / repeat(5, 1fr);
+}
+
+.cards:hover > .card::after {
+  opacity: 1;
+}
+
+.card {
+  position: relative;
+
+  background-color: rgba(255, 255, 255, 0.053);
+
+  border-radius: 10px;
+
+  transition: all 0.3s ease-in-out;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card::before,
+.card::after {
+  content: '';
+  pointer-events: none;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  opacity: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: inherit;
+
+  transition: opacity 500ms ease-in-out;
+}
+
+.card::before {
+  background: radial-gradient(
+    800px circle at var(--x) var(--y),
+    rgba(255, 255, 255, 0.06),
+    transparent 40%
+  );
+
+  z-index: 3;
+}
+
+/* Make the brightness remove the filter on the images */
+.card:hover > .card-content > .banner {
+  filter: brightness(1);
+}
+
+.card::after {
+  background: var(--radial-gradient);
+
+  z-index: 1;
+}
+
+.card:hover::after {
+  opacity: 0;
+}
+
+.card > .card-content {
+  background-color: var(--color-background-soft);
+
+  border-radius: inherit;
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  inset: 2px;
+  position: absolute;
+
+  padding: 2rem;
+
+  z-index: 2;
+}
+
+.fill-banner {
+  grid-column: 4 / 6;
+  grid-row: 1 / 5;
+}
+
+.fill-banner2 {
+  grid-column: 2 / 4;
+  grid-row: 4 / 5;
+}
+
+.fill-banner3 {
+  grid-column: 1 / 1;
+  grid-row: 1 / 5;
+}
+
+.fill-about {
+  grid-column: 2 / 4;
+  grid-row: 1 / 4;
+}
+
+.gradient {
+  background: var(--color-heading);
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient:has(a) {
+  position: relative;
+  text-decoration: none;
+}
+
+.gradient:has(a)::after {
+  content: '';
+  pointer-events: none;
+
+  position: absolute;
+  right: 0;
+  left: 0;
+
+  border-top: 0.1em solid transparent;
+  border-image: var(--color-heading);
+  border-image-slice: 1;
+
+  bottom: 0.1em;
+}
+
+.push {
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  align-content: flex-end;
+
+  flex-direction: row;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.icons {
+  gap: 8px;
+
+  padding-top: 1rem;
+}
+
+.icons > a > img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.fill-banner > .card-content,
+.fill-banner2 > .card-content,
+.fill-banner3 > .card-content {
+  padding: 0;
+}
+
+.banner {
+  border-radius: inherit;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: brightness(0.7);
+  transition: filter 0.3s ease-in-out;
+}
+
+.icons > a {
+  transition: all 0.3s ease-in-out;
+}
+
+.icons > a:hover {
+  transform: scale(1.1);
+  filter: brightness(150%);
+}
